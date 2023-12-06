@@ -1,0 +1,31 @@
+{% extends 'example_app/base.html' %}
+{% load static %}
+
+{% block contact %}
+<div class="list">
+    {% for element in list %}
+    <ul>
+        <li>{{element}}</li>
+    </ul>
+    {% endfor %}
+</div>
+
+<iframe src="{{map}}"></iframe>
+{% endblock contact %}
+
+{% block form %}
+<h2>{{header_form}}</h2>
+{% autoescape off %}
+<p>{{answare}}</p>
+{% endautoescape off %}
+
+<form method = 'post'>
+    {% csrf_token %}
+    <div class='d-grid gap-2 col-6 mx-auto'>
+        {{form}}
+        {% autoescape off %}
+        {{submit}}
+        {% endautoescape off %}
+    </div>
+</form>
+{% endblock form %}

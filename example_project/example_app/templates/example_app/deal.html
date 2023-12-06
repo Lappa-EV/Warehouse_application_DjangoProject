@@ -1,0 +1,34 @@
+{% extends 'example_app/base.html' %}
+{% load static %}
+
+{% block table %}
+<!--ТАБЛИЦА СДЕЛКИ-->
+{% if deal.count > 0 %}
+<table align="center">
+    <tr style="background-color: #f47d84; text-align: center;">
+        <td style="width:5%">ID</td>
+        <td style="width:30%">Наименование, марка</td>
+        <td style="width:10%">Ед. изм.</td>
+        <td style="width:5%">Количество</td>
+        <td style="width:10%">Цена, руб</td>
+        <td style="width:20%">Сотрудник</td>
+        <td style="width:10%">Дата продажи</td>
+    </tr>
+    {% for d in deal %}
+    <tr>
+        <td style="text-align: center;">{{d.id}}</td>
+        <td>{{d.product}}</td>
+        <td style="text-align: center;">Шт.</td>
+        <td style="text-align: center;">{{d.quantity}}</td>
+        <td>{{d.delivery_price}}</td>
+        <td>{{d.employee}}</td>
+        <td style="text-align: center;">{{d.date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<h2>Нет записи в таблице "Сделки"</h2>
+
+{% endif %}
+{% endblock table %}

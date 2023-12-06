@@ -1,0 +1,16 @@
+{% extends 'example_app/base.html' %}
+{% load static %}
+
+{% block main %}
+<p>{{text1}}</p>
+<br>
+<div class="list">
+    {% for element in list %}
+    <ul>
+        <li>{{element}}</li>
+    </ul>
+    {% endfor %}
+</div>
+<img src="{% static 'images/tractor.png' %}">
+{% endblock main %}
+

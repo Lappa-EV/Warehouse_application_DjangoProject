@@ -1,0 +1,15 @@
+{% extends 'example_app/base.html' %}
+{% load static %}
+
+{% block form %}
+<!--ФОРМА АВТОРИЗАЦИИ-->
+<p>{{answare}}</p>
+
+<form method = 'post'>
+    {% csrf_token %}
+    <div class='d-grid gap-2 col-6 mx-auto'>
+        {{form}}
+        <input  type = 'submit' class='btn btn-danger' value = 'Вход в личный кабинет'>
+    </div>
+</form>
+{% endblock form %}

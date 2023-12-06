@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang='en'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>{{header | add:' |  Сельхозмаркет - магазин по продаже запчастей и сельхозтехники'}}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href= "{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <dl class="navigate">
+            <dd><b>СЕЛЬХОЗ<span class="colortext">МАРКЕТ</span></b></dd>
+            <dd><a href='index'>ГЛАВНАЯ</a></dd>
+            <dd><a href='contact'>КОНТАКТЫ</a></dd>
+            <dd><a href='products'>ТОВАРЫ</a></dd>
+            <dd><a href='stock'>СКЛАД</a></dd>
+            {% if user.is_authenticated %}
+            <dd><a href='deal'>СДЕЛКИ</a></dd>
+            <dd><a href='logout' type="button" class="btn btn-outline-danger">{{user}}, выйти</a></dd>
+            {% else %}
+            <dd><a href='login' type="button" class="btn btn-outline-danger">Вход в личный кабинет</a></dd>
+            {% endif %}
+            <dd>8 908 202 40 65</dd>
+        </dl>
+        <br>
+
+        <a href='login'></a>
+        <h1>{{header}}</h1>
+
+        <div class="container">
+            {% block main %}{% endblock main %}
+            {% block contact %}{% endblock contact %}
+            {% block table %}{% endblock table %}
+            {% block form %}{% endblock form %}
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,65 @@
+{% extends 'example_app/base.html' %}
+{% load static %}
+
+
+{% block table %}
+<!--ТАБЛИЦА СКЛАДА-->
+{% if stock.count > 0 %}
+<table align="center">
+    <tr style="background-color: #f47d84; text-align: center;">
+        <td style="width:5%">ID</td>
+        <td style="width:30%">Наименование, марка</td>
+        <td style="width:10%">Единица измерения</td>
+        <td style="width:5%">Количество</td>
+        <td style="width:10%">Цена, руб</td>
+        <td style="width:20%">Поставщик</td>
+        <td style="width:10%">Дата поставки</td>
+    </tr>
+    {% for s in stock %}
+    <tr>
+        <td style="text-align: center;">{{s.id}}</td>
+        <td>{{s.product}}</td>
+        <td style="text-align: center;">Шт.</td>
+        <td>{{s.quantity_product}}</td>
+        <td>{{s.delivery_price}}</td>
+        <td>{{s.supplier}}</td>
+        <td style="text-align: center;">{{s.delivery_date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h2>Нет записи в таблице "Склад"</h2>
+{% endif %}
+{% endblock table %}
+
+
+{% block form %}
+{% if user.is_authenticated %}
+<h2>ФОРМА ДОБАВЛЕНИЯ ТОВАРА НА СКЛАД</h2>
+<form method="post" action="stock_add">
+    {% csrf_token %}
+    <div class='d-grid gap-2 col-6 mx-auto'>
+        {{stockForm}}
+        <input class='batton' type='submit' value='Добавить товар на склад'>
+    </div>
+</form>
+
+<h2>ФОРМА ДОБАВЛЕНИЯ НОМЕНКЛАТУРЫ ТОВАРА</h2>
+<form method="post" action="products_create">
+    {% csrf_token %}
+    <div class='d-grid gap-2 col-6 mx-auto'>
+        {{productForm}}
+        <input class='batton' type="submit" value="Создать номенкатуру товара">
+    </div>
+</form>
+
+<form method="post" action="supplier_create">
+    {% csrf_token %}
+    <h2>ФОРМА ДОБАВЛЕНИЯ ПОСТАВЩИКА</h2>
+    <div class='d-grid gap-2 col-6 mx-auto'>
+        {{supplierForm}}
+        <input class='batton' type="submit" value="Создать поставшика">
+    </div>
+</form>
+{% endif %}
+{% endblock form %}
